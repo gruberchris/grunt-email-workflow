@@ -24,8 +24,8 @@ This grunt task helps simplify things at the design stage.
 
 * Node.js - [Install Node.js](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
 * Grunt-cli and Grunt (`npm install grunt-cli -g`)
-~~* Ruby - [Install ruby with RVM](https://rvm.io/rvm/install)~~
-~~* Premailer (`gem install premailer hpricot nokogiri`) - Inlines the CSS~~
+* ~~Ruby - [Install ruby with RVM](https://rvm.io/rvm/install)~~
+* ~~Premailer (`gem install premailer hpricot nokogiri`) - Inlines the CSS~~
 * Grunt-Inline-CSS ('npm install grunt-inline-css --save-dev')
 * [Mailgun](http://www.mailgun.com) (optional) - Sends the email
 * [Litmus](https://litmus.com) (optional) - Tests the email across all clients/browsers/devices
