@@ -1,25 +1,32 @@
 # Grunt Email Design Workflow
 
+**NOTE:** This is a fork of the 'grunt-email-workflow' repo and has the following modifications:
+
+1. Removed support for SCSS to CSS conversions
+
+2. Replaced Premailer with Inline-CSS
+
+3. Removed dependencies on RubyGems packages
+
 Designing and testing emails is a pain. HTML tables, inline CSS, various devices and clients to test, and varying support for the latest web standards.
 
 This grunt task helps simplify things at the design stage.
 
-1. Compiles your SCSS to CSS
+1. Builds your HTML and TXT email templates
 
-2. Builds your HTML and TXT email templates
+2. Inlines your CSS
 
-3. Inlines your CSS
+3. Uploads any images to a CDN (optional)
 
-4. Uploads any images to a CDN (optional)
-
-5. Sends you a test email to your inbox (optional)
+4. Sends you a test email to your inbox (optional)
 
 ## Requirements
 
 * Node.js - [Install Node.js](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
 * Grunt-cli and Grunt (`npm install grunt-cli -g`)
-* Ruby - [Install ruby with RVM](https://rvm.io/rvm/install)
-* Premailer (`gem install premailer hpricot nokogiri`) - Inlines the CSS
+~~* Ruby - [Install ruby with RVM](https://rvm.io/rvm/install)~~
+~~* Premailer (`gem install premailer hpricot nokogiri`) - Inlines the CSS~~
+* Grunt-Inline-CSS ('npm install grunt-inline-css --save-dev')
 * [Mailgun](http://www.mailgun.com) (optional) - Sends the email
 * [Litmus](https://litmus.com) (optional) - Tests the email across all clients/browsers/devices
 * [Rackspace Cloud](http://www.rackspace.com/cloud/files/) (optional) - Uses Cloud Files as a CDN
@@ -79,14 +86,6 @@ We encourage you __not__ to store sensitive data in your git repository. If you 
 
 <img src="http://i.imgur.com/yrHpTdr.jpg" width="500">
 
-### CSS
-
-This project uses [SCSS](http://sass-lang.com/). You don't need to touch the .css files, these are compiled automatically.
-
-For changes to CSS, modify the `.scss` files.
-
-Media queries and responsive styles are in a separate style sheet so that they don't get inlined. Note that only a few clients support media queries e.g. iOS Mail app.
-
 ### Email templates and content
 
 Handlebars and Assemble are used for templating.
@@ -107,7 +106,6 @@ Handlebars and Assemble are used for templating.
 
 In terminal, run `grunt`. This will:
 
-* Compile your SCSS to CSS
 * Generate your email layout and content
 * Inline your CSS
 

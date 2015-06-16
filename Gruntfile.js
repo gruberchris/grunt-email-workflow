@@ -19,24 +19,6 @@ module.exports = function(grunt) {
         },
 
 
-
-
-        // Takes your scss files and compiles them to css
-        sass: {
-          dist: {
-            options: {
-              style: 'expanded'
-            },
-            files: {
-              '<%= paths.src %>/css/main.css': '<%= paths.src %>/css/scss/main.scss'
-            }
-          }
-        },
-
-
-
-
-
         // Assembles your email content with html layout
         assemble: {
           options: {
@@ -50,9 +32,6 @@ module.exports = function(grunt) {
             dest: '<%= paths.dist %>/'
           }
         },
-
-
-
 
 
         // Replace compiled template images sources from ../src/html to ../dist/html
@@ -81,36 +60,17 @@ module.exports = function(grunt) {
         },
 
 
-
-
-
         // Inlines your css
-        premailer: {
-          html: {
-            options: {
-              removeComments: true
-            },
-            files: [{
-                expand: true,
-                src: ['<%= paths.dist %>/*.html'],
-                dest: ''
-            }]
-          },
-          txt: {
-            options: {
-              mode: 'txt'
-            },
-            files: [{
-                expand: true,
-                src: ['<%= paths.dist %>/*.html'],
-                dest: '',
-                ext: '.txt'
-            }]
-          }
+        inlinecss: {
+            main: {
+                options: {
+                },
+                files: {
+                    '<%= paths.dist %>/branded.html': '<%= paths.dist %>/branded.html',
+                    '<%= paths.dist %>/transaction.html': '<%= paths.dist %>/transaction.html'
+                }
+            }
         },
-
-
-
 
 
         // Optimize images
@@ -130,17 +90,11 @@ module.exports = function(grunt) {
         },
 
 
-
-
-
         // Watches for changes to css or email templates then runs grunt tasks
         watch: {
-          files: ['<%= paths.src %>/css/scss/*','<%= paths.src %>/emails/*','<%= paths.src %>/layouts/*','<%= paths.src %>/partials/*','<%= paths.src %>/data/*'],
+          files: ['<%= paths.src %>/emails/*','<%= paths.src %>/layouts/*','<%= paths.src %>/partials/*','<%= paths.src %>/data/*'],
           tasks: ['default']
         },
-
-
-
 
 
         // Use Mailgun option if you want to email the design to your inbox or to something like Litmus
@@ -158,9 +112,6 @@ module.exports = function(grunt) {
         },
 
 
-
-
-
         // Use Rackspace Cloud Files if you're using images in your email
         cloudfiles: {
           prod: {
@@ -175,6 +126,7 @@ module.exports = function(grunt) {
             }]
           }
         },
+
 
         // CDN will replace local paths with your CDN path
         cdn: {
@@ -201,9 +153,6 @@ module.exports = function(grunt) {
         },
 
 
-
-
-
         // Use Amazon S3 for images
         aws_s3: {
           options: {
@@ -228,9 +177,6 @@ module.exports = function(grunt) {
         },
 
 
-
-
-
         // Send your email template to Litmus for testing
         // grunt litmus --template=transaction.html
         litmus: {
@@ -251,16 +197,19 @@ module.exports = function(grunt) {
     });
 
 
-
     // Load assemble
     grunt.loadNpmTasks('assemble');
+
+    // Load grunt-inline-css
+    grunt.loadNpmTasks('grunt-inline-css');
 
     // Load all grunt tasks
     // https://github.com/sindresorhus/load-grunt-tasks
     require('load-grunt-tasks')(grunt);
 
     // Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('default', ['sass','assemble','premailer','imagemin','replace:src_images']);
+    //grunt.registerTask('default', ['sass','assemble','premailer','imagemin','replace:src_images']);
+    grunt.registerTask('default', ['assemble','inlinecss','imagemin','replace:src_images']);
 
     // Use grunt send if you want to actually send the email to your inbox
     grunt.registerTask('send', ['mailgun']);
