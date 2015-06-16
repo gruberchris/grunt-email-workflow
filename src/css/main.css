@@ -30,7 +30,6 @@ body {
 }
 
 table {
-  -premailer-width: 100%;
   border-collapse: separate !important;
   mso-table-lspace: 0pt;
   mso-table-rspace: 0pt;
@@ -182,7 +181,6 @@ a {
 .btn {
   margin-bottom: 15px;
   width: auto;
-  -premailer-width: auto;
 }
 .btn td {
   background-color: #fff;
